@@ -1,0 +1,6 @@
+@import "./assets/fonts.css";
+@import "tailwindcss";
+
+@theme {
+    --font-default: "Lato", "sans-serif";
+}
