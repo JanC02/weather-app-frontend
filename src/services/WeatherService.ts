@@ -11,7 +11,7 @@ export class WeatherService {
         this.currentCity = city;
 
         try {
-            const response = await fetch(`${this.apiAdress}/api/weather?city=${city}`);
+            const response = await fetch(`${this.apiAdress}/api/weather/current?city=${city}`);
 
             if (response.ok) {
                 const data = await response.json();
