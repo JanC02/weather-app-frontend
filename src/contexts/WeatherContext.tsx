@@ -33,7 +33,6 @@ export default function WeatherContextProvider({ children }: { children: ReactNo
                 temperature: data.current.temp_c,
                 descripiton: data.current.condition.text
             });
-            console.log(data);
         } catch (error) {
             console.error('An error has occuered during fetching weather data: ', error);
         }
