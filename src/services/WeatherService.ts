@@ -4,11 +4,12 @@ export class WeatherService {
     public currentCity: string;
 
     private constructor(startCity: string) {
-        this.currentCity = startCity;
+        this.currentCity = localStorage.getItem('lastCity') || startCity;
     }
 
     async getWeather(city: string) {
         this.currentCity = city;
+        localStorage.setItem('lastCity', city);
 
         try {
             const response = await fetch(`${this.apiAdress}/api/weather/current?city=${city}`);
