@@ -1,58 +1,61 @@
-import { useState, useRef, useEffect } from 'react';
-import type { FormEvent } from 'react';
+import { useState, useEffect } from 'react';
 import { useWeather } from '../../hooks/useWeather';
+import { useDebounce } from '../../hooks/useDebounce';
+import type { FormEvent } from 'react';
+import { WeatherService } from '../../services/WeatherService';
+
+type Suggestion = {
+    id: number;
+    name: string;
+}
 
 export default function SearchBar() {
-    // const [inputText, setInputText] = useState('');
-    const inputRef = useRef<HTMLInputElement>(null);
-
+    const [inputText, setInputText] = useState('');
+    const [ autocompleteSuggestions, setAutocompleteSuggestions ] = useState<Suggestion[]>([]);
     const { fetchWeather } = useWeather();
+    const debouncedValue = useDebounce(inputText, 500);
 
-    // // TODO: zrobic hooka do debouncingu. useDebounce.
-    // let timeout = useRef<number | null>(null);
-    // const onInput = (event: FormEvent) => {
-    //     if (timeout.current) {
-    //         clearTimeout(timeout.current);
-    //     }
-    //     timeout.current = setTimeout(() => {
-    //         const input = event.target as HTMLInputElement;
-    //         const value = input.value;
-
-    //         if (value.length > 0) {
-    //             console.log(value);
-    //             setInputText(value);
-    //         }
-    //     }, 1000);
-    // };
-
-    // useEffect(() => {
-    //     return () => {
-    //         if (timeout.current) {
-    //             clearTimeout(timeout.current);
-    //         }
-    //     }
-    // }, []);
-
-    const handleSearch = async () => {
-        if (inputRef.current && inputRef.current.value.length > 0) {
-            await fetchWeather(inputRef.current.value);
+    useEffect(() => {
+        const getSuggestions = async () => {
+            const data = await WeatherService.getInstance().getAutocompleteSuggestions(debouncedValue);
+            setAutocompleteSuggestions(data);
         }
+        getSuggestions();
+    }, [debouncedValue]);
+
+    const handleInput = (event: FormEvent) => {
+        const target = event.currentTarget as HTMLInputElement;
+        const value = target.value;
+        setInputText(value);
+    };
+
+    const handleSearch = async (city: string) => {
+        await fetchWeather(city);
+        setInputText('');
+        setAutocompleteSuggestions([]);
     };
 
     return (
-        <div className='mb-5 flex flex-col gap-y-5'>
+        <div className='mb-5 flex flex-col gap-y-5 relative'>
             <label className='w-full'>
                 <input 
-                    ref={inputRef} 
                     id='search-city' 
                     type='search' 
                     className='min-w-80 w-full max-w-225 h-8 border border-stone-300 rounded-lg' 
-                    // onInput={onInput}
+                    onInput={handleInput}
+                    value={inputText}
                 />
             </label>
-            <button onClick={handleSearch} className='cursor-pointer w-fit p-1 border border-stone-300 rounded-lg'>
+            {/* <button onClick={handleSearch} className='cursor-pointer w-fit p-1 border border-stone-300 rounded-lg'>
                 Search
-            </button>
+            </button> */}
+            <ul className='absolute top-full'>
+                {
+                    autocompleteSuggestions.map(suggestion => {
+                        return <li key={suggestion.id} onClick={() => handleSearch(suggestion.name)}>{suggestion.name}</li>
+                    })
+                }
+            </ul>
         </div>
     )
 }

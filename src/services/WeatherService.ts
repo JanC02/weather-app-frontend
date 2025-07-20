@@ -25,6 +25,26 @@ export class WeatherService {
         }
     }
 
+    async getAutocompleteSuggestions(query: string) {
+        if (!query) {
+            return [];
+        }
+
+        try {
+            const response = await fetch(`${this.apiAdress}/api/weather/autocomplete?q=${query}`);
+
+            if (response.ok) {
+                const data = await response.json();
+                return data;
+            } else {
+                throw new Error(`Error fetching autocomplete suggestions. ${response.status}: ${response.statusText}`);
+            }
+        } catch (error) {
+            console.error(error);
+            return [];
+        }
+    }
+
     static initialize() {
         if (!WeatherService.instance) {
             WeatherService.instance = new WeatherService('Tarnów');
