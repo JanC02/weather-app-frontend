@@ -7,6 +7,8 @@ import { WeatherService } from '../../services/WeatherService';
 type Suggestion = {
     id: number;
     name: string;
+    latitude: number;
+    longitude: number;
 }
 
 export default function SearchBar() {
@@ -18,7 +20,7 @@ export default function SearchBar() {
     useEffect(() => {
         const getSuggestions = async () => {
             const data = await WeatherService.getInstance().getAutocompleteSuggestions(debouncedValue);
-            setAutocompleteSuggestions(data);
+            setAutocompleteSuggestions(data.results || []);
         }
         getSuggestions();
     }, [debouncedValue]);

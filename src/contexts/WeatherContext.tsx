@@ -38,9 +38,9 @@ export default function WeatherContextProvider({ children }: { children: ReactNo
         }
     };
 
-    useEffect(() => {
-        fetchWeather(WeatherService.getInstance().currentCity)
-    }, []);
+    // useEffect(() => {
+    //     fetchWeather(WeatherService.getInstance().currentCity)
+    // }, []);
 
     const value = {
         weatherData,
