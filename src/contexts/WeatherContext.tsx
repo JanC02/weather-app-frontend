@@ -10,14 +10,14 @@ type WeatherDataType = {
 
 type WeatherContextType = {
     weatherData: WeatherDataType | null;
-    fetchWeather: (city: string) => Promise<void>;
+    fetchWeather: (latitude: number, longitude: number, city: string) => Promise<void>;
 }
 
 export const WeatherContext = createContext<WeatherContextType>({
     weatherData: {
         city: '',
         temperature: 99999,
-        descripiton: ''
+        // descripiton: ''
     },
     fetchWeather: async () => {}
 });
@@ -25,22 +25,26 @@ export const WeatherContext = createContext<WeatherContextType>({
 export default function WeatherContextProvider({ children }: { children: ReactNode }) {
     const [weatherData, setWeatherData] = useState<WeatherDataType | null>(null);
 
-    const fetchWeather = async (city: string) => {
+    const fetchWeather = async (latitude: number, longitude: number, city: string) => {
         try {
-            const data = await WeatherService.getInstance().getWeather(city);
+            const data = await WeatherService.getInstance().getWeather(latitude, longitude, city);
+            console.log(data);
             setWeatherData({
                 city: city,
-                temperature: data.current.temp_c,
-                descripiton: data.current.condition.text
+                temperature: data.current.temperature_2m,
+                // descripiton: data.current.condition.text
             });
         } catch (error) {
             console.error('An error has occuered during fetching weather data: ', error);
         }
     };
 
-    // useEffect(() => {
-    //     fetchWeather(WeatherService.getInstance().currentCity)
-    // }, []);
+    useEffect(() => {
+        const service = WeatherService.getInstance();
+        if (service.latitude && service.longitude) {
+            fetchWeather(service.latitude, service.longitude, service.currentCity);
+        }
+    }, []);
 
     const value = {
         weatherData,

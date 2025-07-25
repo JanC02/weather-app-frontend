@@ -2,17 +2,26 @@ export class WeatherService {
     private static instance: WeatherService;
     private readonly apiAdress = import.meta.env.VITE_API_PROXY_URL;
     public currentCity: string;
+    public latitude: number | null;
+    public longitude: number | null;
 
     private constructor(startCity: string) {
-        this.currentCity = localStorage.getItem('lastCity') || startCity;
+        const latitude = Number(localStorage.getItem('latitude'));
+        const longitude = Number(localStorage.getItem('longitude')) 
+
+        this.latitude = !isNaN(latitude) ? latitude : null;
+        this.longitude = !isNaN(longitude) ? longitude : null;
+        this.currentCity = localStorage.getItem('city') || startCity;
     }
 
-    async getWeather(city: string) {
+    async getWeather(latitude: number, longitude: number, city: string) {
         this.currentCity = city;
-        localStorage.setItem('lastCity', city);
+        localStorage.setItem('latitude', latitude.toString());
+        localStorage.setItem('longitude', longitude.toString());
+        localStorage.setItem('city', city.toString());
 
         try {
-            const response = await fetch(`${this.apiAdress}/api/weather/current?city=${city}`);
+            const response = await fetch(`${this.apiAdress}/api/weather/current?lat=${latitude}&lon=${longitude}`);
 
             if (response.ok) {
                 const data = await response.json();

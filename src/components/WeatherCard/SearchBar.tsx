@@ -31,11 +31,13 @@ export default function SearchBar() {
         setInputText(value);
     };
 
-    const handleSearch = async (city: string) => {
-        await fetchWeather(city);
+    const handleSearch = async (latitude: number, longitude: number, city: string) => {
+        await fetchWeather(latitude, longitude, city);
         setInputText('');
         setAutocompleteSuggestions([]);
     };
+
+    console.log(autocompleteSuggestions);
 
     return (
         <div className='mb-5 flex flex-col gap-y-5 relative'>
@@ -57,7 +59,7 @@ export default function SearchBar() {
                     autocompleteSuggestions.map(suggestion => {
                         return <li 
                                 key={suggestion.id}
-                                onClick={() => handleSearch(suggestion.name)}
+                                onClick={() => handleSearch(suggestion.latitude, suggestion.longitude, suggestion.name)}
                                 className={`
                                     h-10 pl-1.5 flex items-center 
                                     text-xl max-w-225 bg-stone-100 hover:bg-stone-200 text-stone-900 
