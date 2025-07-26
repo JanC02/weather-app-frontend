@@ -7,6 +7,8 @@ import { WeatherService } from '../../services/WeatherService';
 type Suggestion = {
     id: number;
     name: string;
+    latitude: number;
+    longitude: number;
 }
 
 export default function SearchBar() {
@@ -18,7 +20,7 @@ export default function SearchBar() {
     useEffect(() => {
         const getSuggestions = async () => {
             const data = await WeatherService.getInstance().getAutocompleteSuggestions(debouncedValue);
-            setAutocompleteSuggestions(data);
+            setAutocompleteSuggestions(data.results || []);
         }
         getSuggestions();
     }, [debouncedValue]);
@@ -29,8 +31,8 @@ export default function SearchBar() {
         setInputText(value);
     };
 
-    const handleSearch = async (city: string) => {
-        await fetchWeather(city);
+    const handleSearch = async (latitude: number, longitude: number, city: string) => {
+        await fetchWeather(latitude, longitude, city);
         setInputText('');
         setAutocompleteSuggestions([]);
     };
@@ -47,25 +49,25 @@ export default function SearchBar() {
                     placeholder='Enter a city'
                 />
             </label>
-            {/* <button onClick={handleSearch} className='cursor-pointer w-fit p-1 border border-stone-300 rounded-lg'>
-                Search
-            </button> */}
-            <ul className='absolute top-full w-full'>
-                {
-                    autocompleteSuggestions.map(suggestion => {
-                        return <li 
-                                key={suggestion.id}
-                                onClick={() => handleSearch(suggestion.name)}
-                                className={`
-                                    h-10 pl-1.5 flex items-center 
-                                    text-xl max-w-225 bg-stone-100 hover:bg-stone-200 text-stone-900 
-                                    transition duration-100 cursor-pointer
-                                    first:rounded-tl-md first:rounded-tr-md last:rounded-bl-md last:rounded-br-md
-                                `}
-                            >{suggestion.name}</li>
-                    })
-                }
-            </ul>
+            {
+                autocompleteSuggestions.length > 0 && 
+                <ul className='absolute top-full w-full'>
+                    {
+                        autocompleteSuggestions.map(suggestion => {
+                            return <li 
+                                    key={suggestion.id}
+                                    onClick={() => handleSearch(suggestion.latitude, suggestion.longitude, suggestion.name)}
+                                    className={`
+                                        h-10 pl-1.5 flex items-center 
+                                        text-xl max-w-225 bg-stone-100 hover:bg-stone-200 text-stone-900 
+                                        transition duration-100 cursor-pointer
+                                        first:rounded-tl-md first:rounded-tr-md last:rounded-bl-md last:rounded-br-md
+                                    `}
+                                >{suggestion.name}</li>
+                        })
+                    }
+                </ul>
+            }
         </div>
     )
 }
