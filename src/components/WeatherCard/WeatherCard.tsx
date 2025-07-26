@@ -5,7 +5,7 @@ export default function WeatherCard() {
     const { weatherData } = useWeather();
 
     return (
-        <div className='flex flex-col items-centew'>
+        <div className='flex flex-col'>
             <SearchBar />
             <div className='flex gap-x-6 text-4xl text-stone-900'>
                 { weatherData && 

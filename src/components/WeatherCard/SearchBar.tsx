@@ -37,8 +37,6 @@ export default function SearchBar() {
         setAutocompleteSuggestions([]);
     };
 
-    console.log(autocompleteSuggestions);
-
     return (
         <div className='mb-5 flex flex-col gap-y-5 relative'>
             <label className='w-full'>
@@ -51,25 +49,25 @@ export default function SearchBar() {
                     placeholder='Enter a city'
                 />
             </label>
-            {/* <button onClick={handleSearch} className='cursor-pointer w-fit p-1 border border-stone-300 rounded-lg'>
-                Search
-            </button> */}
-            <ul className='absolute top-full w-full'>
-                {
-                    autocompleteSuggestions.map(suggestion => {
-                        return <li 
-                                key={suggestion.id}
-                                onClick={() => handleSearch(suggestion.latitude, suggestion.longitude, suggestion.name)}
-                                className={`
-                                    h-10 pl-1.5 flex items-center 
-                                    text-xl max-w-225 bg-stone-100 hover:bg-stone-200 text-stone-900 
-                                    transition duration-100 cursor-pointer
-                                    first:rounded-tl-md first:rounded-tr-md last:rounded-bl-md last:rounded-br-md
-                                `}
-                            >{suggestion.name}</li>
-                    })
-                }
-            </ul>
+            {
+                autocompleteSuggestions.length > 0 && 
+                <ul className='absolute top-full w-full'>
+                    {
+                        autocompleteSuggestions.map(suggestion => {
+                            return <li 
+                                    key={suggestion.id}
+                                    onClick={() => handleSearch(suggestion.latitude, suggestion.longitude, suggestion.name)}
+                                    className={`
+                                        h-10 pl-1.5 flex items-center 
+                                        text-xl max-w-225 bg-stone-100 hover:bg-stone-200 text-stone-900 
+                                        transition duration-100 cursor-pointer
+                                        first:rounded-tl-md first:rounded-tr-md last:rounded-bl-md last:rounded-br-md
+                                    `}
+                                >{suggestion.name}</li>
+                        })
+                    }
+                </ul>
+            }
         </div>
     )
 }
