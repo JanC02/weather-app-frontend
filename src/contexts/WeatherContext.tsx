@@ -6,6 +6,7 @@ import { getWeatherDescription } from "../utils/weatherUtils";
 type WeatherDataType = {
     city: string;
     temperature: number;
+    pressure: number;
     description?: string;
 };
 
@@ -27,12 +28,13 @@ export default function WeatherContextProvider({ children }: { children: ReactNo
             const newWeatherData: WeatherDataType = {
                 city: city,
                 temperature: data.current.temperature_2m,
+                pressure: data.current.pressure_msl
             };
 
             if (description !== 'Wrong weather code.') {
                 newWeatherData.description = description;
             }
-            
+
             setWeatherData(newWeatherData);          
         } catch (error) {
             console.error('An error has occuered during fetching weather data: ', error);
