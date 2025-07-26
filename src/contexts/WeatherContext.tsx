@@ -13,14 +13,7 @@ type WeatherContextType = {
     fetchWeather: (latitude: number, longitude: number, city: string) => Promise<void>;
 }
 
-export const WeatherContext = createContext<WeatherContextType>({
-    weatherData: {
-        city: '',
-        temperature: 99999,
-        // descripiton: ''
-    },
-    fetchWeather: async () => {}
-});
+export const WeatherContext = createContext<WeatherContextType | null>(null);
 
 export default function WeatherContextProvider({ children }: { children: ReactNode }) {
     const [weatherData, setWeatherData] = useState<WeatherDataType | null>(null);
