@@ -15,7 +15,10 @@ export default function WeatherCard() {
                         </p>
                         <span>
                             { weatherData.temperature } °C
-                        </span> 
+                        </span>
+                        <p>
+                            { weatherData.description }
+                        </p> 
                     </>
                 }
             </div>
