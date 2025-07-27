@@ -1,11 +1,13 @@
 import { createContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
 import { WeatherService } from "../services/WeatherService";
+import { getWeatherDescription } from "../utils/weatherUtils";
 
 type WeatherDataType = {
     city: string;
     temperature: number;
-    descripiton?: string;
+    pressure: number;
+    description?: string;
 };
 
 type WeatherContextType = {
@@ -21,12 +23,19 @@ export default function WeatherContextProvider({ children }: { children: ReactNo
     const fetchWeather = async (latitude: number, longitude: number, city: string) => {
         try {
             const data = await WeatherService.getInstance().getWeather(latitude, longitude, city);
-            console.log(data);
-            setWeatherData({
+            const description = getWeatherDescription(data.current.weather_code);
+
+            const newWeatherData: WeatherDataType = {
                 city: city,
                 temperature: data.current.temperature_2m,
-                // descripiton: data.current.condition.text
-            });
+                pressure: data.current.pressure_msl
+            };
+
+            if (description !== 'Wrong weather code.') {
+                newWeatherData.description = description;
+            }
+
+            setWeatherData(newWeatherData);          
         } catch (error) {
             console.error('An error has occuered during fetching weather data: ', error);
         }

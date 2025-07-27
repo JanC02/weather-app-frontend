@@ -7,15 +7,24 @@ export default function WeatherCard() {
     return (
         <div className='flex flex-col'>
             <SearchBar />
-            <div className='flex gap-x-6 text-4xl text-stone-900'>
+            <div className='text-stone-900'>
                 { weatherData && 
                     <>
+                        <div className='flex gap-x-6 text-4xl'>
+                            <span>
+                                { weatherData.city }
+                            </span>
+                            <span>
+                                { weatherData.temperature } °C
+                            </span>
+                            <span>
+                                { weatherData.pressure } hPa
+                            </span>
+                        </div>
                         <p>
-                            { weatherData.city }
+                            { weatherData.description }
                         </p>
-                        <span>
-                            { weatherData.temperature } °C
-                        </span> 
+
                     </>
                 }
             </div>
