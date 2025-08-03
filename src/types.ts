@@ -4,7 +4,7 @@ const CurrentSchema = z.object({
     interval: z.number(),
     pressure_msl: z.number(),
     temperature_2m: z.number(),
-    time: z.iso.datetime(),
+    time: z.string(),
     weather_code: z.number()
 });
 

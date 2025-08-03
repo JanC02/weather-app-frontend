@@ -15,10 +15,10 @@ export default function WeatherCard() {
                                 { weatherData.city }
                             </span>
                             <span>
-                                { weatherData.temperature } °C
+                                { weatherData.current.temperature_2m } °C
                             </span>
                             <span>
-                                { weatherData.pressure } hPa
+                                { weatherData.current.pressure_msl } hPa
                             </span>
                         </div>
                         <p>

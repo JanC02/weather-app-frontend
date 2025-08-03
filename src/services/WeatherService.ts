@@ -1,3 +1,5 @@
+import { type WeatherDataType, WeatherDataSchema } from "../types.ts";
+
 export class WeatherService {
     private static instance: WeatherService;
     private readonly apiAdress = import.meta.env.VITE_API_PROXY_URL;
@@ -14,23 +16,21 @@ export class WeatherService {
         this.currentCity = localStorage.getItem('city') || startCity;
     }
 
-    async getWeather(latitude: number, longitude: number, city: string) {
+    async getWeather(latitude: number, longitude: number, city: string): Promise<WeatherDataType> {
         this.currentCity = city;
         localStorage.setItem('latitude', latitude.toString());
         localStorage.setItem('longitude', longitude.toString());
         localStorage.setItem('city', city.toString());
 
-        try {
-            const response = await fetch(`${this.apiAdress}/api/weather/current?lat=${latitude}&lon=${longitude}`);
+        const response = await fetch(`${this.apiAdress}/api/weather/current?lat=${latitude}&lon=${longitude}`);
 
-            if (response.ok) {
-                const data = await response.json();
-                return data;
-            } else {
-                throw new Error(`${response.statusText}: ${response.status}`);
-            }
-        } catch (error) {
-            console.error(error);
+        if (response.ok) {
+            const data = await response.json();
+
+            WeatherDataSchema.parse(data);
+            return data;
+        } else {
+            throw new Error(`${response.statusText}: ${response.status}`);
         }
     }
 
