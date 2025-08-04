@@ -42,4 +42,33 @@ export const WeatherDataSchema = z.object({
     utc_offset_seconds: z.number()
 });
 
+const AutocompleteResultSchema = z.object({
+    admin1: z.string().optional(),
+    admin1_id: z.number().optional(),
+    admin2: z.string().optional(),
+    admin2_id: z.number().optional(),
+    admin3: z.string().optional(),
+    admin3_id: z.number().optional(),
+    admin4: z.string().optional(),
+    admin4_id: z.number().optional(),
+    country: z.string(),
+    country_code: z.string(),
+    country_id: z.number(),
+    elevation: z.number(),
+    feature_code: z.string(),
+    id: z.number(),
+    latitude: z.number(),
+    longitude: z.number(),
+    name: z.string(),
+    population: z.number().optional(),
+    postcodes: z.array(z.string()).optional(),
+    timezone: z.string()
+});
+
+export const AutocompleteSchema = z.object({
+    generationtime_ms: z.number(),
+    results: z.array(AutocompleteResultSchema)
+});
+
 export type WeatherDataType = z.infer<typeof WeatherDataSchema>;
+export type AutocompleteType = z.infer<typeof AutocompleteSchema>;

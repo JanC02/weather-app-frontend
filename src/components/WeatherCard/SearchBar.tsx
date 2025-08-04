@@ -20,7 +20,11 @@ export default function SearchBar() {
     useEffect(() => {
         const getSuggestions = async () => {
             const data = await WeatherService.getInstance().getAutocompleteSuggestions(debouncedValue);
-            setAutocompleteSuggestions(data.results || []);
+            if (Array.isArray(data)) {
+                setAutocompleteSuggestions(data);
+            } else {
+                setAutocompleteSuggestions(data.results);
+            }
         }
         getSuggestions();
     }, [debouncedValue]);
