@@ -51,10 +51,10 @@ const AutocompleteResultSchema = z.object({
     admin3_id: z.number().optional(),
     admin4: z.string().optional(),
     admin4_id: z.number().optional(),
-    country: z.string(),
+    country: z.string().optional(),
     country_code: z.string(),
-    country_id: z.number(),
-    elevation: z.number(),
+    country_id: z.number().optional(),
+    elevation: z.number().optional(),
     feature_code: z.string(),
     id: z.number(),
     latitude: z.number(),
@@ -67,7 +67,7 @@ const AutocompleteResultSchema = z.object({
 
 export const AutocompleteSchema = z.object({
     generationtime_ms: z.number(),
-    results: z.array(AutocompleteResultSchema)
+    results: z.array(AutocompleteResultSchema).default([])
 });
 
 export type WeatherDataType = z.infer<typeof WeatherDataSchema>;
