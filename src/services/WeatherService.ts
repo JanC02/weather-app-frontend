@@ -1,3 +1,7 @@
+import type { WeatherDataType, AutocompleteType } from "../types.ts";
+import { WeatherDataSchema, AutocompleteSchema } from "../types.ts";
+import { ZodError } from "zod";
+
 export class WeatherService {
     private static instance: WeatherService;
     private readonly apiAdress = import.meta.env.VITE_API_PROXY_URL;
@@ -14,27 +18,24 @@ export class WeatherService {
         this.currentCity = localStorage.getItem('city') || startCity;
     }
 
-    async getWeather(latitude: number, longitude: number, city: string) {
+    async getWeather(latitude: number, longitude: number, city: string): Promise<WeatherDataType> {
         this.currentCity = city;
         localStorage.setItem('latitude', latitude.toString());
         localStorage.setItem('longitude', longitude.toString());
         localStorage.setItem('city', city.toString());
 
-        try {
-            const response = await fetch(`${this.apiAdress}/api/weather/current?lat=${latitude}&lon=${longitude}`);
+        const response = await fetch(`${this.apiAdress}/api/weather/current?lat=${latitude}&lon=${longitude}`);
 
-            if (response.ok) {
-                const data = await response.json();
-                return data;
-            } else {
-                throw new Error(`${response.statusText}: ${response.status}`);
-            }
-        } catch (error) {
-            console.error(error);
+        if (response.ok) {
+            const data = await response.json();
+            WeatherDataSchema.parse(data);
+            return data;
+        } else {
+            throw new Error(`${response.statusText}: ${response.status}`);
         }
     }
 
-    async getAutocompleteSuggestions(query: string) {
+    async getAutocompleteSuggestions(query: string): Promise<AutocompleteType | []> {
         if (!query) {
             return [];
         }
@@ -44,14 +45,20 @@ export class WeatherService {
 
             if (response.ok) {
                 const data = await response.json();
+                AutocompleteSchema.parse(data);
                 return data;
             } else {
                 throw new Error(`Error fetching autocomplete suggestions. ${response.status}: ${response.statusText}`);
             }
         } catch (error) {
-            console.error(error);
+            if (error instanceof ZodError) {
+                console.error('An error has occuered during fetching autocomplete suggestions: ', error.message, error.issues, error.stack);
+            } else {
+                console.error('An error has occuered during fetching autocomplete suggestions: ', error);
+            }
             return [];
         }
+
     }
 
     static initialize() {
