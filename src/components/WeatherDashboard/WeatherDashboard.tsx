@@ -20,7 +20,7 @@ const ForecastItem = ({ day, temp }: { day: string, temp: number }) => (
 // chart placeholder
 const ChartPlaceholder = () => (
     <div className="bg-white p-4 rounded-lg shadow-sm h-full flex flex-col">
-        <h3 className="font-bold text-lg mb-2">Temperature Trend</h3>
+        <h3 className="font-bold text-lg mb-2">Trend temperaturowy</h3>
         <div className="flex-grow flex items-center justify-center bg-gray-50 rounded-lg">
             <svg className="w-full h-full text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 100 50">
                 <path d="M 0 40 C 10 10, 30 10, 40 25 S 60 40, 70 30 S 90 10, 100 20" strokeWidth="2" />
@@ -44,7 +44,7 @@ export default function WeatherDashboard() {
                 <SearchBar />
                 {weatherData ? (
                     <div className="bg-white p-6 rounded-lg shadow-sm">
-                        <h2 className="font-bold text-2xl mb-4">Current Weather</h2>
+                        <h2 className="font-bold text-2xl mb-4">Obecna pogoda</h2>
                         <div className="flex items-center gap-4">
                             <WeatherIcon />
                             <div>
@@ -56,11 +56,11 @@ export default function WeatherDashboard() {
                     </div>
                 ) : (
                     <div className="bg-white p-6 rounded-lg shadow-sm text-center">
-                        <p className="text-gray-500">Search for a city to see the weather.</p>
+                        <p className="text-gray-500">Wyszukaj miasto aby zobaczyć pogodę.</p>
                     </div>
                 )}
                 <div className="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 className="font-bold text-2xl mb-4">5-Day Forecast</h3>
+                    <h3 className="font-bold text-2xl mb-4">Prognoza 5-cio dniowa</h3>
                     <ul className="space-y-3">
                         {forecast.map(day => (
                             <ForecastItem key={day.day} day={day.day} temp={day.temp} />
@@ -73,11 +73,11 @@ export default function WeatherDashboard() {
                 {weatherData && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                         <div className="bg-white p-6 rounded-lg shadow-sm">
-                            <h3 className="font-bold text-lg mb-2">Pressure</h3>
+                            <h3 className="font-bold text-lg mb-2">Ciśnienie</h3>
                             <p className="text-4xl font-bold">{weatherData.current.pressure_msl} <span className="text-2xl text-gray-500">hPa</span></p>
                         </div>
                         <div className="bg-white p-6 rounded-lg shadow-sm">
-                            <h3 className="font-bold text-lg mb-2">Humidity</h3>
+                            <h3 className="font-bold text-lg mb-2">Wilgotność</h3>
                             <p className="text-4xl font-bold">75%</p> {/* Placeholder */}
                         </div>
                     </div>

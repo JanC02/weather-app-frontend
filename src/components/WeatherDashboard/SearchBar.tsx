@@ -49,7 +49,7 @@ export default function SearchBar() {
                 className='h-12 flex-1 px-4 ml-4 text-lg text-gray-800 bg-gray-100 border-2 border-gray-200 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none' 
                 onInput={handleInput}
                 value={inputText}
-                placeholder='Search for a city...'
+                placeholder='Wyszukaj miasto'
             />
             {
                 autocompleteSuggestions.length > 0 && 
