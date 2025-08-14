@@ -5,7 +5,8 @@ const CurrentSchema = z.object({
     pressure_msl: z.number(),
     temperature_2m: z.number(),
     time: z.string(),
-    weather_code: z.number()
+    weather_code: z.number(),
+    relative_humidity_2m: z.number()
 });
 
 const CurrentUnitsSchema = z.object({
@@ -13,7 +14,8 @@ const CurrentUnitsSchema = z.object({
     pressure_msl: z.literal('hPa'),
     temperature_2m: z.literal('°C'),
     time: z.literal('iso8601'),
-    weather_code: z.literal('wmo code')
+    weather_code: z.literal('wmo code'),
+    relative_humidity_2m: z.literal('%')
 });
 
 const DailySchema = z.object({
