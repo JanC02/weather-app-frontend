@@ -1,4 +1,5 @@
 import SearchBar from './SearchBar';
+import Humidity from './Humidity';
 import { useWeather } from '../../hooks/useWeather';
 
 // icon
@@ -74,12 +75,10 @@ export default function WeatherDashboard() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                         <div className="bg-white p-6 rounded-lg shadow-sm">
                             <h3 className="font-bold text-lg mb-2">Ciśnienie</h3>
-                            <p className="text-4xl font-bold">{weatherData.current.pressure_msl} <span className="text-2xl text-gray-500">hPa</span></p>
+                            <p className="text-4xl font-bold">{weatherData.current.pressure_msl} <span
+                                className="text-2xl text-gray-500">hPa</span></p>
                         </div>
-                        <div className="bg-white p-6 rounded-lg shadow-sm">
-                            <h3 className="font-bold text-lg mb-2">Wilgotność</h3>
-                            <p className="text-4xl font-bold">75%</p> {/* Placeholder */}
-                        </div>
+                        <Humidity humidity={weatherData.current.relative_humidity_2m} />
                     </div>
                 )}
                 <ChartPlaceholder />
