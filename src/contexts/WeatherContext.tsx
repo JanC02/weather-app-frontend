@@ -4,9 +4,11 @@ import { WeatherService } from "../services/WeatherService";
 import { getWeatherDescription } from "../utils/weatherUtils";
 import { type WeatherDataType } from "../types.ts";
 import { ZodError } from "zod";
+import { dateParser } from "../utils/dateParser.ts";
 
 type ResultWeatherType = WeatherDataType & {
     city: string;
+    dailyWeather: { dayName: string, temperature: number }[]
     description?: string;
 };
 
@@ -25,8 +27,19 @@ export default function WeatherContextProvider({ children }: { children: ReactNo
             const data = await WeatherService.getInstance().getWeather(latitude, longitude, city);
             const description = getWeatherDescription(data.current.weather_code);
 
+            const dailyWeather = data.daily.time.map((time, index) => {
+                let dayName = dateParser(time)[0];
+                if (index === 0) {
+                    dayName += ' (dzisiaj)';
+                }
+                const temperature = data.daily.temperature_2m_max[index];
+
+                return { dayName, temperature };
+            });
+
             const newWeatherData: ResultWeatherType = {
                 city,
+                dailyWeather,
                 ...data
             };
 
