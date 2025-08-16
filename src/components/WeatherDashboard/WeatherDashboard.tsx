@@ -25,27 +25,25 @@ export default function WeatherDashboard() {
 
             <div className="lg:col-span-1 flex flex-col gap-8">
                 <SearchBar/>
-                {weatherData ? (
-                    <>
+                { weatherData && <>
                         <CurrentWeather temperature={weatherData.current.temperature_2m} city={weatherData.city} description={weatherData.description} />
                         <DailyForecast dailyWeather={weatherData?.dailyWeather} />
                     </>
-                ) : (
-                    <div className="bg-white p-6 rounded-lg shadow-sm text-center">
-                        <p className="text-gray-500">Wyszukaj miasto aby zobaczyć pogodę.</p>
-                    </div>
-                )}
+                }
             </div>
 
-            <div className="lg:col-span-2 flex flex-col gap-8">
-                {weatherData && (
+            { !weatherData && <div className="lg:col-span-2 bg-white p-6 rounded-lg shadow-sm text-center">
+                <p>Wyszukaj miasto aby zobaczyć pogodę.</p>
+            </div> }
+
+            { weatherData && <div className="lg:col-span-2 flex flex-col gap-8">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                         <Pressure pressure={weatherData.current.pressure_msl}/>
                         <Humidity humidity={weatherData.current.relative_humidity_2m}/>
                     </div>
-                )}
-                <ChartPlaceholder/>
-            </div>
+                    <ChartPlaceholder/>
+                </div>
+            }
         </div>
     );
 }
