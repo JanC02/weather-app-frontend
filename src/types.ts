@@ -21,7 +21,8 @@ const CurrentUnitsSchema = z.object({
 const DailySchema = z.object({
     temperature_2m_max: z.array(z.number()),
     temperature_2m_min: z.array(z.number()),
-    time: z.array(z.string())
+    time: z.array(z.string()),
+    weather_code: z.array(z.number())
 });
 
 const DailyUnitsSchema = z.object({

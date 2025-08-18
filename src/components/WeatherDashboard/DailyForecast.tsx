@@ -2,7 +2,7 @@ import ForecastItem from './ForecastItem.tsx';
 import DashboardItem from './DashboardItem.tsx';
 
 type DailyForecastProps = {
-    dailyWeather: { dayName: string, temperature: number }[]
+    dailyWeather: { dayName: string, temperature: number, weatherCode: number }[]
 };
 
 export default function DailyForecast({ dailyWeather }: DailyForecastProps ) {
@@ -11,7 +11,7 @@ export default function DailyForecast({ dailyWeather }: DailyForecastProps ) {
         <ul className="space-y-3">
             {
                 dailyWeather.map((dailyData) =>
-                    <ForecastItem key={dailyData.dayName} dayName={dailyData.dayName} temperature={dailyData.temperature} />)
+                    <ForecastItem key={dailyData.dayName} dayName={dailyData.dayName} temperature={dailyData.temperature} weatherCode={dailyData.weatherCode} />)
             }
         </ul>
     </DashboardItem>

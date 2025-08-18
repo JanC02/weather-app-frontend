@@ -8,7 +8,7 @@ import { dateParser } from "../utils/dateParser.ts";
 
 type ResultWeatherType = WeatherDataType & {
     city: string;
-    dailyWeather: { dayName: string, temperature: number }[]
+    dailyWeather: { dayName: string, temperature: number, weatherCode: number }[]
     description?: string;
 };
 
@@ -33,8 +33,9 @@ export default function WeatherContextProvider({ children }: { children: ReactNo
                     dayName += ' (dzisiaj)';
                 }
                 const temperature = data.daily.temperature_2m_max[index];
+                const weatherCode = data.daily.weather_code[index];
 
-                return { dayName, temperature };
+                return { dayName, temperature, weatherCode };
             });
 
             const newWeatherData: ResultWeatherType = {
