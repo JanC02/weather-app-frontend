@@ -14,8 +14,8 @@ export default function ForecastItem({ dayName, minTemp, maxTemp, weatherCode }:
         <span className="font-bold">{dayName}</span>
         <div className="ml-auto flex items-center gap-3">
             <Icon className="w-8 h-8" />
-            <span className="font-bold text-right">{maxTemp}°C</span>
-            <span className="text-right text-gray-500">{minTemp}°C</span>
+            <span className="w-10 font-bold text-right">{maxTemp}°C</span>
+            <span className="w-10 text-right text-gray-500">{minTemp}°C</span>
         </div>
     </li>
 }
