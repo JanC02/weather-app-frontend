@@ -46,6 +46,9 @@ export class WeatherService {
             if (response.ok) {
                 const data = await response.json();
                 AutocompleteSchema.parse(data);
+
+                console.log(data);
+
                 return data;
             } else {
                 throw new Error(`Error fetching autocomplete suggestions. ${response.status}: ${response.statusText}`);
