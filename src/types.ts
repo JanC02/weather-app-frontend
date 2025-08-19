@@ -76,3 +76,10 @@ export const AutocompleteSchema = z.object({
 
 export type WeatherDataType = z.infer<typeof WeatherDataSchema>;
 export type AutocompleteType = z.infer<typeof AutocompleteSchema>;
+
+export type DailyWeatherType = {
+    dayName: string;
+    minTemp: number;
+    maxTemp: number;
+    weatherCode: number;
+};
