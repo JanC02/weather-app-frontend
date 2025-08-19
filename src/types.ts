@@ -6,7 +6,8 @@ const CurrentSchema = z.object({
     temperature_2m: z.number(),
     time: z.string(),
     weather_code: z.number(),
-    relative_humidity_2m: z.number()
+    relative_humidity_2m: z.number(),
+    is_day: z.union([z.literal(0), z.literal(1)])
 });
 
 const CurrentUnitsSchema = z.object({
@@ -21,7 +22,8 @@ const CurrentUnitsSchema = z.object({
 const DailySchema = z.object({
     temperature_2m_max: z.array(z.number()),
     temperature_2m_min: z.array(z.number()),
-    time: z.array(z.string())
+    time: z.array(z.string()),
+    weather_code: z.array(z.number())
 });
 
 const DailyUnitsSchema = z.object({

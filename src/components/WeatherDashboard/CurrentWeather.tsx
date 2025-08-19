@@ -1,23 +1,21 @@
 import DashboardItem from './DashboardItem';
+import { getIcon } from "../../utils/getIcon.ts";
 
 type CurrentWeatherProps = {
     temperature: number;
     city: string;
+    weatherCode: number;
+    isDay: 0 | 1;
     description?: string;
 }
 
-// icon
-const WeatherIcon = () => (
-    <div className="w-24 h-24 bg-blue-500 text-white flex items-center justify-center rounded-lg">
-        <span className="text-5xl">☀️</span>
-    </div>
-);
+export default function CurrentWeather({ temperature, city, description, weatherCode, isDay }: CurrentWeatherProps) {
+    const Icon = getIcon(weatherCode, isDay);
 
-export default function CurrentWeather({ temperature, city, description }: CurrentWeatherProps) {
     return <DashboardItem>
         <h2 className="font-bold text-2xl mb-4">Obecna pogoda</h2>
         <div className="flex items-center gap-4">
-            <WeatherIcon/>
+            <Icon className='w-24 h-24' />
             <div>
                 <p className="text-5xl font-extrabold">{Math.round(temperature)}°C</p>
                 <p className="text-xl font-bold text-gray-700">{city}</p>
