@@ -26,7 +26,7 @@ export default function WeatherDashboard() {
             <div className="lg:col-span-1 flex flex-col gap-8">
                 <SearchBar/>
                 { weatherData && <>
-                        <CurrentWeather temperature={weatherData.current.temperature_2m} city={weatherData.city} description={weatherData.description} weatherCode={weatherData.current.weather_code} />
+                        <CurrentWeather temperature={weatherData.current.temperature_2m} city={weatherData.city} description={weatherData.description} weatherCode={weatherData.current.weather_code} isDay={weatherData.current.is_day} />
                         <DailyForecast dailyWeather={weatherData?.dailyWeather} />
                     </>
                 }

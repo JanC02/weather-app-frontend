@@ -5,11 +5,12 @@ type CurrentWeatherProps = {
     temperature: number;
     city: string;
     weatherCode: number;
+    isDay: 0 | 1;
     description?: string;
 }
 
-export default function CurrentWeather({ temperature, city, description, weatherCode }: CurrentWeatherProps) {
-    const Icon = getIcon(weatherCode);
+export default function CurrentWeather({ temperature, city, description, weatherCode, isDay }: CurrentWeatherProps) {
+    const Icon = getIcon(weatherCode, isDay);
 
     return <DashboardItem>
         <h2 className="font-bold text-2xl mb-4">Obecna pogoda</h2>

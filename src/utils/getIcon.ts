@@ -1,7 +1,12 @@
 import React from 'react';
+
 import DaySunny from '../assets/icons/wi--day-sunny.svg?react';
 import DaySunnyOvercast from '../assets/icons/wi--day-sunny-overcast.svg?react';
 import DayCloudy from '../assets/icons/wi--day-cloudy.svg?react';
+
+import NightClear from '../assets/icons/wi--night-clear.svg?react';
+import NightAltPartlyCloudy from '../assets/icons/wi--night-alt-partly-cloudy.svg?react';
+import NightAltCloudy from '../assets/icons/wi--night-alt-cloudy.svg?react';
 
 import Cloudy from '../assets/icons/wi--cloud.svg?react';
 import Fog from '../assets/icons/wi--fog.svg?react';
@@ -15,6 +20,13 @@ import SnowflakeCold from '../assets/icons/wi--snowflake-cold.svg?react';
 import StormShowers from '../assets/icons/wi--storm-showers.svg?react';
 import Thunderstorm from '../assets/icons/wi--thunderstorm.svg?react';
 import Hail from '../assets/icons/wi--hail.svg?react';
+
+
+const nightWeatherIcons: Record<number, React.FC<React.SVGProps<SVGSVGElement>>> = {
+    0: NightClear,            // Bezchmurnie (Clear sky)
+    1: NightAltPartlyCloudy,  // Głównie bezchmurnie (Mainly clear)
+    2: NightAltCloudy,        // Częściowe zachmurzenie (Partly cloudy)
+};
 
 const weatherIcons: Record<number, React.FC<React.SVGProps<SVGSVGElement>>> = {
     0: DaySunny,          // Bezchmurnie (Clear sky)
@@ -47,4 +59,17 @@ const weatherIcons: Record<number, React.FC<React.SVGProps<SVGSVGElement>>> = {
     99: Hail,             // Burza z gradem (intensywna) (Thunderstorm with heavy hail)
 };
 
-export const getIcon = (weatherCode: number) => weatherIcons[weatherCode];
+export const getIcon = (weatherCode: number, isDay = 1) => {
+    if (isDay === 0) {
+        switch (weatherCode) {
+            case 0:
+                return nightWeatherIcons[0];
+            case 1:
+                return nightWeatherIcons[1];
+            case 2:
+                return nightWeatherIcons[2];
+        }
+    }
+
+    return weatherIcons[weatherCode];
+}
