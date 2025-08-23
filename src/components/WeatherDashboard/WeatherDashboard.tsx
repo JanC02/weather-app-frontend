@@ -4,18 +4,7 @@ import DailyForecast from './DailyForecast';
 import { useWeather } from '../../hooks/useWeather';
 import CurrentWeather from './CurrentWeather';
 import Pressure from './Pressure';
-
-// chart placeholder
-const ChartPlaceholder = () => (
-    <div className="bg-white p-4 rounded-lg shadow-sm h-full flex flex-col">
-        <h3 className="font-bold text-lg mb-2">Trend temperaturowy</h3>
-        <div className="flex-grow flex items-center justify-center bg-gray-50 rounded-lg">
-            <svg className="w-full h-full text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 100 50">
-                <path d="M 0 40 C 10 10, 30 10, 40 25 S 60 40, 70 30 S 90 10, 100 20" strokeWidth="2" />
-            </svg>
-        </div>
-    </div>
-);
+import Meteorogram from './Meteorogram';
 
 export default function WeatherDashboard() {
     const { weatherData } = useWeather();
@@ -41,7 +30,7 @@ export default function WeatherDashboard() {
                         <Pressure pressure={weatherData.current.pressure_msl}/>
                         <Humidity humidity={weatherData.current.relative_humidity_2m}/>
                     </div>
-                    <ChartPlaceholder/>
+                    <Meteorogram/>
                 </div>
             }
         </div>
