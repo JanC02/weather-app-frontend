@@ -27,6 +27,8 @@ export default function WeatherContextProvider({ children }: { children: ReactNo
             const data = await WeatherService.getInstance().getWeather(latitude, longitude, city);
             const description = getWeatherDescription(data.current.weather_code);
 
+            console.log(data);
+
             const dailyWeather: DailyWeatherType[] = data.daily.time.map((time, index) => {
                 let dayName = dateParser(time)[0];
                 if (index === 0) {
