@@ -30,7 +30,7 @@ export default function WeatherDashboard() {
                         <Pressure pressure={weatherData.current.pressure_msl}/>
                         <Humidity humidity={weatherData.current.relative_humidity_2m}/>
                     </div>
-                    <Meteorogram/>
+                    <Meteorogram hourlyWeather={weatherData.hourlyWeather} />
                 </div>
             }
         </div>

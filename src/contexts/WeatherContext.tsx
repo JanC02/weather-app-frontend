@@ -2,13 +2,14 @@ import { createContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
 import { WeatherService } from "../services/WeatherService";
 import { getWeatherDescription } from "../utils/weatherUtils";
-import { type WeatherDataType, type DailyWeatherType } from "../types.ts";
+import type { WeatherDataType, DailyWeatherType, HourlyDataType } from "../types.ts";
 import { ZodError } from "zod";
 import { dateParser } from "../utils/dateParser.ts";
 
 type ResultWeatherType = WeatherDataType & {
     city: string;
     dailyWeather: DailyWeatherType[];
+    hourlyWeather: HourlyDataType[];
     description?: string;
 };
 
@@ -41,11 +42,23 @@ export default function WeatherContextProvider({ children }: { children: ReactNo
                 return { dayName, minTemp, maxTemp, weatherCode };
             });
 
+            const hourlyWeather: HourlyDataType[] = data.hourly.time.map((time, index) => {
+                return {
+                    temperature: data.hourly.temperature_2m[index],
+                    apparentTemperature: data.hourly.apparent_temperature[index],
+                    precipitation: data.hourly.precipitation[index],
+                    label: index % 24 === 0 ? new Date(time).toLocaleString() : new Date(time).toLocaleTimeString(),
+                }
+            });
+
             const newWeatherData: ResultWeatherType = {
                 city,
                 dailyWeather,
+                hourlyWeather,
                 ...data
             };
+
+            console.log(newWeatherData);
 
             if (description !== 'Wrong weather code.') {
                 newWeatherData.description = description;

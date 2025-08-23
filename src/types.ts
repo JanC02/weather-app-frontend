@@ -100,3 +100,10 @@ export type DailyWeatherType = {
     maxTemp: number;
     weatherCode: number;
 };
+
+export type HourlyDataType = {
+    apparentTemperature: number;
+    precipitation: number;
+    temperature: number;
+    label: string;
+};
