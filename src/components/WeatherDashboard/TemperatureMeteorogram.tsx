@@ -10,7 +10,7 @@ type TemperatureMeteorogramProps = {
 export default function TemperatureMeteorogram({ hourlyWeather }: TemperatureMeteorogramProps) {
     const series = [
         {
-            name: 'Temperatura',
+            name: 'temperature',
             data: hourlyWeather.map(item => item.temperature),
         },
     ];

@@ -10,13 +10,13 @@ type PrecipitationMeteorogramProps = {
 export default function PrecipitationMeteorogram({ hourlyWeather }: PrecipitationMeteorogramProps) {
     const series = [
         {
-            name: 'Opady',
+            name: 'precipitation',
             data: hourlyWeather.map(item => item.precipitation),
             type: 'column',
             yAxisIndex: 0,
         },
         {
-            name: 'Wilgotnosc',
+            name: 'humidity',
             data: hourlyWeather.map(item => item.humidity),
             type: 'line',
             yAxisIndex: 1,
@@ -56,7 +56,7 @@ export default function PrecipitationMeteorogram({ hourlyWeather }: Precipitatio
         },
         yaxis: [
             {
-                seriesName: 'Opady',
+                seriesName: 'precipitation',
                 title: {
                     text: 'Opady (mm)',
                 },
@@ -68,7 +68,7 @@ export default function PrecipitationMeteorogram({ hourlyWeather }: Precipitatio
                 min: 0,
             },
             {
-                seriesName: 'Wilgotnosc',
+                seriesName: 'humidity',
                 opposite: true,
                 title: {
                     text: 'Wilgotność (%)',
