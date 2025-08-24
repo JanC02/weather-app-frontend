@@ -35,6 +35,7 @@ const DailyUnitsSchema = z.object({
 const HourlySchema = z.object({
     apparent_temperature: z.array(z.number()),
     precipitation: z.array(z.number()),
+    relative_humidity_2m: z.array(z.number()),
     temperature_2m: z.array(z.number()),
     time: z.array(z.string()),
 });
@@ -42,6 +43,7 @@ const HourlySchema = z.object({
 const HourlyUnitsSchema = z.object({
     apparent_temperature: z.literal('°C'),
     precipitation: z.literal('mm'),
+    relative_humidity_2m: z.literal('%'),
     temperature_2m: z.literal('°C'),
     time: z.literal('iso8601'),
 });
