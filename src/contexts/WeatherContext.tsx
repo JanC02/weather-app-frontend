@@ -57,8 +57,6 @@ export default function WeatherContextProvider({ children }: { children: ReactNo
                 ...data
             };
 
-            console.log(newWeatherData);
-
             if (description !== 'Wrong weather code.') {
                 newWeatherData.description = description;
             }
