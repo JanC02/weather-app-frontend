@@ -4,7 +4,7 @@ import DailyForecast from './DailyForecast';
 import { useWeather } from '../../hooks/useWeather';
 import CurrentWeather from './CurrentWeather';
 import Pressure from './Pressure';
-import Meteorogram from './Meteorogram';
+import Meteorograms from './Meteorograms.tsx';
 
 export default function WeatherDashboard() {
     const { weatherData } = useWeather();
@@ -30,7 +30,7 @@ export default function WeatherDashboard() {
                         <Pressure pressure={weatherData.current.pressure_msl}/>
                         <Humidity humidity={weatherData.current.relative_humidity_2m}/>
                     </div>
-                    <Meteorogram hourlyWeather={weatherData.hourlyWeather} />
+                    <Meteorograms hourlyWeather={weatherData.hourlyWeather} />
                 </div>
             }
         </div>
