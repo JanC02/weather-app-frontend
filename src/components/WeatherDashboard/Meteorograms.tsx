@@ -1,5 +1,6 @@
 import DashboardItem from './DashboardItem.tsx';
 import TemperatureMeteorogram from './TemperatureMeteorogram.tsx';
+import PrecipitationMeteorogram from './PrecipitationMeteorogram.tsx';
 import type { HourlyDataType } from '../../types';
 
 type MeteorogramProps = {
@@ -13,6 +14,7 @@ export default function Meteorograms({ hourlyWeather }: MeteorogramProps) {
             <div className="rounded-lg  overflow-x-auto">
                 <div className="h-full">
                     <TemperatureMeteorogram hourlyWeather={hourlyWeather} />
+                    <PrecipitationMeteorogram hourlyWeather={hourlyWeather} />
                 </div>
             </div>
         </DashboardItem>

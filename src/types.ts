@@ -108,4 +108,5 @@ export type HourlyDataType = {
     precipitation: number;
     temperature: number;
     label: string;
+    humidity: number;
 };

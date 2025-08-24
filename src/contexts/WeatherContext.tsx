@@ -28,8 +28,6 @@ export default function WeatherContextProvider({ children }: { children: ReactNo
             const data = await WeatherService.getInstance().getWeather(latitude, longitude, city);
             const description = getWeatherDescription(data.current.weather_code);
 
-            console.log(data);
-
             const dailyWeather: DailyWeatherType[] = data.daily.time.map((time, index) => {
                 let dayName = dateParser(time)[0];
                 if (index === 0) {
@@ -48,6 +46,7 @@ export default function WeatherContextProvider({ children }: { children: ReactNo
                     apparentTemperature: data.hourly.apparent_temperature[index],
                     precipitation: data.hourly.precipitation[index],
                     label: index % 24 === 0 ? new Date(time).toLocaleString() : new Date(time).toLocaleTimeString(),
+                    humidity: data.hourly.relative_humidity_2m[index],
                 }
             });
 
