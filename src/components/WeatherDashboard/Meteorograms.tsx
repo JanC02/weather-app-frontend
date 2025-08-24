@@ -11,7 +11,7 @@ export default function Meteorograms({ hourlyWeather }: MeteorogramProps) {
         <DashboardItem className='h-full flex flex-col'>
             <h3 className="font-bold text-lg mb-2">Meteorogramy</h3>
             <div className="rounded-lg  overflow-x-auto">
-                <div className="h-full w-[2500px]">
+                <div className="h-full">
                     <TemperatureMeteorogram hourlyWeather={hourlyWeather} />
                 </div>
             </div>
