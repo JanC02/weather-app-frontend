@@ -32,11 +32,29 @@ const DailyUnitsSchema = z.object({
     time: z.literal('iso8601')
 });
 
+const HourlySchema = z.object({
+    apparent_temperature: z.array(z.number()),
+    precipitation: z.array(z.number()),
+    relative_humidity_2m: z.array(z.number()),
+    temperature_2m: z.array(z.number()),
+    time: z.array(z.string()),
+});
+
+const HourlyUnitsSchema = z.object({
+    apparent_temperature: z.literal('°C'),
+    precipitation: z.literal('mm'),
+    relative_humidity_2m: z.literal('%'),
+    temperature_2m: z.literal('°C'),
+    time: z.literal('iso8601'),
+});
+
 export const WeatherDataSchema = z.object({
     current: CurrentSchema,
     current_units: CurrentUnitsSchema,
     daily: DailySchema,
     daily_units: DailyUnitsSchema,
+    hourly: HourlySchema,
+    hourly_units: HourlyUnitsSchema,
     elevation: z.number(),
     generationtime_ms: z.number(),
     latitude: z.number(),
@@ -83,4 +101,12 @@ export type DailyWeatherType = {
     minTemp: number;
     maxTemp: number;
     weatherCode: number;
+};
+
+export type HourlyDataType = {
+    apparentTemperature: number;
+    precipitation: number;
+    temperature: number;
+    label: string;
+    humidity: number;
 };
