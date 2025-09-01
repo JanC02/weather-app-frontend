@@ -21,7 +21,7 @@ export default function WeatherDashboard() {
                 }
             </div>
 
-            { !weatherData && <div className="lg:col-span-2 bg-white p-6 rounded-lg shadow-sm text-center">
+            { !weatherData && <div className="h-20 flex items-center justify-center lg:col-span-2 bg-white p-6 rounded-lg shadow-sm text-center">
                 <p>Wyszukaj miasto aby zobaczyć pogodę.</p>
             </div> }
 
