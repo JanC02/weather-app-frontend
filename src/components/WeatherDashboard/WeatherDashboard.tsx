@@ -25,7 +25,7 @@ export default function WeatherDashboard() {
                 <p>Wyszukaj miasto aby zobaczyć pogodę.</p>
             </div> }
 
-            { weatherData && <div className="lg:col-span-2 flex flex-col gap-8">
+            { weatherData && <div className="lg:col-span-2 flex flex-col gap-8 h-full">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                         <Pressure pressure={weatherData.current.pressure_msl}/>
                         <Humidity humidity={weatherData.current.relative_humidity_2m}/>

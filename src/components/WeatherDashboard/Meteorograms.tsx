@@ -9,7 +9,7 @@ type MeteorogramProps = {
 
 export default function Meteorograms({ hourlyWeather }: MeteorogramProps) {
     return (
-        <DashboardItem className='h-full flex flex-col'>
+        <DashboardItem className='h-full flex flex-col grow'>
             <h3 className="font-bold text-lg mb-2">Meteorogramy</h3>
             <div className="rounded-lg  overflow-x-auto">
                 <div className="h-full">
