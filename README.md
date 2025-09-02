@@ -6,10 +6,29 @@ A frontend for a weather application built with **React** and **TypeScript**. Th
 
 ## Tech Stack
 
-* **React**
-* **Vite**
-* **TypeScript**
-* **TailwindCSS**
+*   **React**
+*   **Vite**
+*   **TypeScript**
+*   **TailwindCSS**
+*   **Zod** (for data validation)
+
+***
+
+## Features
+
+*   **City Search**: Autocomplete suggestions for easy city searching.
+*   **Current Weather**: Displays temperature, perceived temperature, pressure, and humidity.
+*   **Daily & Hourly Forecasts**: Provides a 7-day weather forecast and detailed hourly data.
+*   **Meteorograms**: Visual charts for temperature, precipitation, and humidity.
+*   **Persistent State**: Remembers the user's last searched location for a better experience.
+
+***
+
+## Architecture & Design Patterns
+
+*   **React Context**: Used for global state management, providing weather data throughout the component tree.
+*   **Singleton Pattern**: The `WeatherService` class ensures a single point of contact for all API interactions.
+*   **Schema Validation**: Responses from the backend are validated using `Zod` to ensure data integrity and prevent runtime errors.
 
 ***
 
@@ -27,29 +46,25 @@ A frontend for a weather application built with **React** and **TypeScript**. Th
     ```
 
 3.  **Create a `.env` file:**
-    Copy the `.env.example` file (if it exists) or create a new `.env` file in the root directory. Then, add the URL to your backend proxy server:
+    Create a `.env` file in the root directory. You need to provide the URL of the backend proxy server.
+
+    **Important**: In Vite, environment variables must be prefixed with `VITE_` to be accessible in the client-side code.
+
     ```env
     # The URL of the backend proxy server
-    API_PROXY_URL=http://localhost:5000
+    VITE_API_PROXY_URL=http://localhost:5000
     ```
-    **Note:** In Vite, environment variables must be prefixed with `VITE_` to be exposed to the client-side code.
 
 4.  **Run the application:**
-    * For development (with auto-reload):
+    *   For development (with auto-reload):
         ```bash
         npm run dev
         ```
-    * To build for production:
+    *   To build for production:
         ```bash
         npm run build
         ```
     After building, the production-ready files will be available in the `dist` directory.
-
-***
-
-## Configuration
-
-For the application to work correctly, a running backend proxy server is required. Ensure that the server address in the `.env` file (`VITE_API_PROXY_URL`) is correct and points to your running backend.
 
 ***
 
