@@ -2,26 +2,33 @@ import { createContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
 import { WeatherService } from "../services/WeatherService";
 import { getWeatherDescription } from "../utils/weatherUtils";
-import type { WeatherDataType, DailyWeatherType, HourlyDataType } from "../types.ts";
+import type { DailyWeatherType, HourlyDataType } from "../types.ts";
 import { ZodError } from "zod";
 import { dateParser } from "../utils/dateParser.ts";
 
-type ResultWeatherType = WeatherDataType & {
+type WeatherState = {
     city: string;
-    dailyWeather: DailyWeatherType[];
-    hourlyWeather: HourlyDataType[];
-    description?: string;
+    current: {
+        temperature: number;
+        weatherCode: number;
+        pressure: number;
+        humidity: number;
+        isDay: 0 | 1;
+        description?: string;
+    };
+    daily: DailyWeatherType[];
+    hourly: HourlyDataType[];
 };
 
 type WeatherContextType = {
-    weatherData: ResultWeatherType | null;
+    weatherData: WeatherState | null;
     fetchWeather: (latitude: number, longitude: number, city: string) => Promise<void>;
 }
 
 export const WeatherContext = createContext<WeatherContextType | null>(null);
 
 export default function WeatherContextProvider({ children }: { children: ReactNode }) {
-    const [weatherData, setWeatherData] = useState<ResultWeatherType| null>(null);
+    const [weatherData, setWeatherData] = useState<WeatherState| null>(null);
 
     const fetchWeather = async (latitude: number, longitude: number, city: string) => {
         try {
@@ -50,18 +57,24 @@ export default function WeatherContextProvider({ children }: { children: ReactNo
                 }
             });
 
-            const newWeatherData: ResultWeatherType = {
+            const newWeatherData: WeatherState = {
                 city,
-                dailyWeather,
-                hourlyWeather,
-                ...data
+                current: {
+                    temperature: data.current.temperature_2m,
+                    weatherCode: data.current.weather_code,
+                    pressure: data.current.pressure_msl,
+                    humidity: data.current.relative_humidity_2m,
+                    isDay: data.current.is_day,
+                },
+                daily: dailyWeather,
+                hourly: hourlyWeather,
             };
 
-            if (description !== 'Wrong weather code.') {
-                newWeatherData.description = description;
+            if(description !== 'Wrong weather code.') {
+                newWeatherData.current.description = description;
             }
 
-            setWeatherData(newWeatherData);          
+            setWeatherData(newWeatherData);
         } catch (error) {
             if (error instanceof ZodError) {
                 console.error('An error has occuered during fetching weather data: ', error.message, error.issues, error.stack);

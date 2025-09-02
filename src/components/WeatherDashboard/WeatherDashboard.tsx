@@ -15,8 +15,8 @@ export default function WeatherDashboard() {
             <div className="lg:col-span-1 flex flex-col gap-8">
                 <SearchBar/>
                 { weatherData && <>
-                        <CurrentWeather temperature={weatherData.current.temperature_2m} city={weatherData.city} description={weatherData.description} weatherCode={weatherData.current.weather_code} isDay={weatherData.current.is_day} />
-                        <DailyForecast dailyWeather={weatherData?.dailyWeather} />
+                        <CurrentWeather temperature={weatherData.current.temperature} city={weatherData.city} description={weatherData.current.description} weatherCode={weatherData.current.weatherCode} isDay={weatherData.current.isDay} />
+                        <DailyForecast dailyWeather={weatherData?.daily} />
                     </>
                 }
             </div>
@@ -27,10 +27,10 @@ export default function WeatherDashboard() {
 
             { weatherData && <div className="lg:col-span-2 flex flex-col gap-8 h-full">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                        <Pressure pressure={weatherData.current.pressure_msl}/>
-                        <Humidity humidity={weatherData.current.relative_humidity_2m}/>
+                        <Pressure pressure={weatherData.current.pressure}/>
+                        <Humidity humidity={weatherData.current.humidity}/>
                     </div>
-                    <Meteorograms hourlyWeather={weatherData.hourlyWeather} />
+                    <Meteorograms hourlyWeather={weatherData.hourly} />
                 </div>
             }
         </div>
