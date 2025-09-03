@@ -14,3 +14,9 @@ body {
 #root {
     min-height: 100vh;
 }
+
+#search-city::-webkit-search-cancel-button,
+#search-city::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+}

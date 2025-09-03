@@ -5,6 +5,7 @@ import type { FormEvent } from 'react';
 import { WeatherService } from '../../services/WeatherService';
 import { type AutocompleteResultType } from '../../types';
 import SuggestionItem from './SuggestionItem';
+import ClearButton from './ClearButton';
 
 export default function SearchBar() {
     const [inputText, setInputText] = useState('');
@@ -37,17 +38,25 @@ export default function SearchBar() {
     };
 
     return (
-        <div className='relative w-full bg-white p-4 pl-0 rounded-lg shadow-sm flex'>
-            <input 
-                id='search-city' 
-                type='search' 
-                className='h-12 flex-1 px-4 ml-4 text-lg text-gray-800 bg-gray-100 border-2 border-gray-200 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none'
+        <div className='relative w-full bg-white p-4 pl-0 rounded-lg shadow-sm flex items-center'>
+            <input
+                id='search-city'
+                type='search'
+                className='h-12 flex-1 px-4 ml-4 text-lg text-gray-800 bg-gray-100 border-2 border-gray-200 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none appearance-none'
                 onInput={handleInput}
                 value={inputText}
                 placeholder='Wyszukaj miasto'
             />
+            {inputText && (
+                <ClearButton
+                    onClick={() => {
+                        setInputText('');
+                        setAutocompleteSuggestions([]);
+                    }}
+                />
+            )}
             {
-                autocompleteSuggestions.length > 0 && 
+                autocompleteSuggestions.length > 0 &&
                 <ul className='absolute top-full mt-2 w-full max-h-150 overflow-y-auto bg-white rounded-md shadow-lg z-10 overflow-hidden ring-1 ring-gray-200'>
                     {
                         autocompleteSuggestions.map(suggestion => {
