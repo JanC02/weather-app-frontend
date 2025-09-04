@@ -32,9 +32,9 @@ export default function SearchBar() {
     };
 
     const handleSearch = async (latitude: number, longitude: number, city: string) => {
-        await fetchWeather(latitude, longitude, city);
         setInputText('');
         setAutocompleteSuggestions([]);
+        await fetchWeather(latitude, longitude, city);
     };
 
     return (
