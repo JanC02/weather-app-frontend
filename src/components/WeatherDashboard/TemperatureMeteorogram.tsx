@@ -44,7 +44,7 @@ export default function TemperatureMeteorogram({ hourlyWeather }: TemperatureMet
                     fontSize: '10px',
                 },
             },
-            tickAmount: Math.round(hourlyweather.length / 4),
+            tickAmount: Math.round(hourlyWeather.length / 4),
         },
         yaxis: {
             title: {
