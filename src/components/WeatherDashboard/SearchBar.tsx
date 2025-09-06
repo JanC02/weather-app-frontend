@@ -20,6 +20,8 @@ export default function SearchBar() {
                 setAutocompleteSuggestions(data);
             } else if(data.results){
                 setAutocompleteSuggestions(data.results);
+            } else {
+                setAutocompleteSuggestions([]);
             }
         }
         getSuggestions();
