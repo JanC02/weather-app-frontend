@@ -2,13 +2,14 @@ import { createContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
 import { WeatherService } from "../services/WeatherService";
 import { getWeatherDescription } from "../utils/weatherUtils";
-import type { DailyWeatherType, HourlyDataType, WeatherState, DashboardStatus } from "../types.ts";
+import type { DailyWeatherType, HourlyDataType, WeatherState, DashboardStatus, AutocompleteType } from "../types.ts";
 import { ZodError } from "zod";
 import { dateParser } from "../utils/dateParser.ts";
 
 type WeatherContextType = {
     weatherData: WeatherState | null;
     fetchWeather: (latitude: number, longitude: number, city: string) => Promise<void>;
+    fetchAutocompleteData: (q: string) => Promise<AutocompleteType | []>
     currentStatus: DashboardStatus;
 }
 
@@ -75,6 +76,10 @@ export default function WeatherContextProvider({ children }: { children: ReactNo
         }
     };
 
+    const fetchAutocompleteData = async (query: string): Promise<AutocompleteType | []> => {
+            return await WeatherService.getInstance().getAutocompleteSuggestions(query);
+    }
+
     useEffect(() => {
         const service = WeatherService.getInstance();
         if (service.latitude && service.longitude) {
@@ -85,6 +90,7 @@ export default function WeatherContextProvider({ children }: { children: ReactNo
     const value = {
         weatherData,
         fetchWeather,
+        fetchAutocompleteData,
         currentStatus
     };
 
