@@ -18,8 +18,10 @@ export default function SearchBar() {
             const data = await WeatherService.getInstance().getAutocompleteSuggestions(debouncedValue);
             if (Array.isArray(data)) {
                 setAutocompleteSuggestions(data);
-            } else {
+            } else if(data.results){
                 setAutocompleteSuggestions(data.results);
+            } else {
+                setAutocompleteSuggestions([]);
             }
         }
         getSuggestions();
