@@ -40,8 +40,13 @@ export class WeatherService {
             return [];
         }
 
+        const trimmedQuery = query.trim();
+        if (!trimmedQuery) {
+            return [];
+        }
+
         try {
-            const response = await fetch(`${this.apiAdress}/api/weather/autocomplete?q=${query}`);
+            const response = await fetch(`${this.apiAdress}/api/weather/autocomplete?q=${trimmedQuery}`);
 
             if (response.ok) {
                 const data = await response.json();
