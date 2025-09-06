@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
-import { WeatherService } from "../services/WeatherService";
-import { getWeatherDescription } from "../utils/weatherUtils";
+import { WeatherService } from "../services/WeatherService.ts";
+import { getWeatherDescription } from "../utils/weatherUtils.ts";
 import type { DailyWeatherType, HourlyDataType, WeatherState, DashboardStatus, AutocompleteType } from "../types.ts";
 import { ZodError } from "zod";
 import { dateParser } from "../utils/dateParser.ts";

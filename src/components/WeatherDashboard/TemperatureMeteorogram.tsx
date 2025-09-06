@@ -1,4 +1,4 @@
-import type { HourlyDataType } from '../../types';
+import type { HourlyDataType } from '../../types.ts';
 import ReactApexChart from 'react-apexcharts';
 import { type ApexOptions } from 'apexcharts';
 import MeteorogramWrapper from './MeteorogramWrapper.tsx';

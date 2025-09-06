@@ -1,4 +1,4 @@
-import DashboardItem from './DashboardItem';
+import DashboardItem from './DashboardItem.tsx';
 import { getIcon } from "../../utils/getIcon.ts";
 
 type CurrentWeatherProps = {

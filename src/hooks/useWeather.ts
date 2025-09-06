@@ -1,5 +1,5 @@
 import { use } from 'react';
-import { WeatherContext } from '../contexts/WeatherContext';
+import { WeatherContext } from '../contexts/WeatherContext.tsx';
 
 export const useWeather = () => {
     const context = use(WeatherContext);
