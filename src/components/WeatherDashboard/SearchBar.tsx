@@ -2,20 +2,19 @@ import { useState, useEffect } from 'react';
 import { useWeather } from '../../hooks/useWeather';
 import { useDebounce } from '../../hooks/useDebounce';
 import type { FormEvent } from 'react';
-import { WeatherService } from '../../services/WeatherService';
-import { type AutocompleteResultType } from '../../types';
+import type { AutocompleteResultType } from '../../types';
 import SuggestionItem from './SuggestionItem';
 import ClearButton from './ClearButton';
 
 export default function SearchBar() {
     const [inputText, setInputText] = useState('');
     const [ autocompleteSuggestions, setAutocompleteSuggestions ] = useState<AutocompleteResultType[]>([]);
-    const { fetchWeather } = useWeather();
+    const { fetchWeather, fetchAutocompleteData } = useWeather();
     const debouncedValue = useDebounce(inputText, 500);
 
     useEffect(() => {
         const getSuggestions = async () => {
-            const data = await WeatherService.getInstance().getAutocompleteSuggestions(debouncedValue);
+            const data = await fetchAutocompleteData(debouncedValue);
             if (Array.isArray(data)) {
                 setAutocompleteSuggestions(data);
             } else if(data.results){
