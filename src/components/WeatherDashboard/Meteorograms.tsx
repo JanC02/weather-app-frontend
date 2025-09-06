@@ -1,7 +1,7 @@
 import DashboardItem from './DashboardItem.tsx';
 import TemperatureMeteorogram from './TemperatureMeteorogram.tsx';
 import PrecipitationMeteorogram from './PrecipitationMeteorogram.tsx';
-import type { HourlyDataType } from '../../types';
+import type { HourlyDataType } from '../../types.ts';
 
 type MeteorogramProps = {
     hourlyWeather: HourlyDataType[];

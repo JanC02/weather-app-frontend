@@ -1,12 +1,12 @@
-import SearchBar from './SearchBar';
-import Humidity from './Humidity';
-import DailyForecast from './DailyForecast';
-import { useWeather } from '../../hooks/useWeather';
-import CurrentWeather from './CurrentWeather';
-import Pressure from './Pressure';
+import SearchBar from './SearchBar.tsx';
+import Humidity from './Humidity.tsx';
+import DailyForecast from './DailyForecast.tsx';
+import { useWeather } from '../../hooks/useWeather.ts';
+import CurrentWeather from './CurrentWeather.tsx';
+import Pressure from './Pressure.tsx';
 import Meteorograms from './Meteorograms.tsx';
-import type { WeatherState, DashboardStatus } from '../../types';
-import Spinner from '../Spinner';
+import type { WeatherState, DashboardStatus } from '../../types.ts';
+import Spinner from '../Spinner.tsx';
 
 const renderContent = (
     weatherData: WeatherState | null, 

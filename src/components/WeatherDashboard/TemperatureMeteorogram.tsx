@@ -1,4 +1,4 @@
-import type { HourlyDataType } from '../../types';
+import type { HourlyDataType } from '../../types.ts';
 import ReactApexChart from 'react-apexcharts';
 import { type ApexOptions } from 'apexcharts';
 import MeteorogramWrapper from './MeteorogramWrapper.tsx';
@@ -44,7 +44,7 @@ export default function TemperatureMeteorogram({ hourlyWeather }: TemperatureMet
                     fontSize: '10px',
                 },
             },
-            tickAmount: Math.round(hourlyWeather.length / 4),
+            tickAmount: Math.round(hourlyweather.length / 4),
         },
         yaxis: {
             title: {

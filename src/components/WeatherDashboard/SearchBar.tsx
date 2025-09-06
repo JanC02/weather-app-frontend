@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useWeather } from '../../hooks/useWeather';
-import { useDebounce } from '../../hooks/useDebounce';
+import { useWeather } from '../../hooks/useWeather.ts';
+import { useDebounce } from '../../hooks/useDebounce.ts';
 import type { FormEvent } from 'react';
-import type { AutocompleteResultType } from '../../types';
-import SuggestionItem from './SuggestionItem';
-import ClearButton from './ClearButton';
+import type { AutocompleteResultType } from '../../types.ts';
+import SuggestionItem from './SuggestionItem.tsx';
+import ClearButton from './ClearButton.tsx';
 
 export default function SearchBar() {
     const [inputText, setInputText] = useState('');

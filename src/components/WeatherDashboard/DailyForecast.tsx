@@ -1,6 +1,6 @@
 import ForecastItem from './ForecastItem.tsx';
 import DashboardItem from './DashboardItem.tsx';
-import { type DailyWeatherType } from '../../types';
+import { type DailyWeatherType } from '../../types.ts';
 
 type DailyForecastProps = {
     dailyWeather: DailyWeatherType[];

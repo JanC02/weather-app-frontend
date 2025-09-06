@@ -1,6 +1,6 @@
-import WeatherDashboard from './components/WeatherDashboard/WeatherDashboard';
-import WeatherContextProvider from './contexts/WeatherContext';
-import Footer from './components/Footer/Footer';
+import WeatherDashboard from './components/WeatherDashboard/WeatherDashboard.tsx';
+import WeatherContextProvider from './contexts/WeatherContext.tsx';
+import Footer from './components/Footer/Footer.tsx';
 
 function App() {
     return (
