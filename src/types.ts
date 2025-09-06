@@ -110,3 +110,19 @@ export type HourlyDataType = {
     label: string;
     humidity: number;
 };
+
+export type DashboardStatus = 'OK' | 'LOADING' | 'ERROR';
+
+export type WeatherState = {
+    city: string;
+    current: {
+        temperature: number;
+        weatherCode: number;
+        pressure: number;
+        humidity: number;
+        isDay: 0 | 1;
+        description?: string;
+    };
+    daily: DailyWeatherType[];
+    hourly: HourlyDataType[];
+};
