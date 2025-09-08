@@ -1,28 +1,37 @@
 import type { WeatherDataType, AutocompleteType } from "../types.ts";
 import { WeatherDataSchema, AutocompleteSchema } from "../types.ts";
 import { ZodError } from "zod";
+import { config } from "../config.ts";
 
 export class WeatherService {
     private static instance: WeatherService;
     private readonly apiAdress = import.meta.env.VITE_API_PROXY_URL;
-    public currentCity: string;
+    public currentCity: string | null;
     public latitude: number | null;
     public longitude: number | null;
 
     private constructor(startCity: string) {
-        const latitude = Number(localStorage.getItem('latitude'));
-        const longitude = Number(localStorage.getItem('longitude')) 
-
-        this.latitude = !isNaN(latitude) ? latitude : null;
-        this.longitude = !isNaN(longitude) ? longitude : null;
-        this.currentCity = localStorage.getItem('city') || startCity;
+        if (config.enableSavingLastCity) {
+            const latitude = Number(localStorage.getItem('latitude'));
+            const longitude = Number(localStorage.getItem('longitude')) 
+    
+            this.latitude = !isNaN(latitude) ? latitude : null;
+            this.longitude = !isNaN(longitude) ? longitude : null;
+            this.currentCity = localStorage.getItem('city') || startCity;
+        } else {
+            this.currentCity = null;
+            this.latitude = null;
+            this.longitude = null;
+        }
     }
 
     async getWeather(latitude: number, longitude: number, city: string): Promise<WeatherDataType> {
         this.currentCity = city;
-        localStorage.setItem('latitude', latitude.toString());
-        localStorage.setItem('longitude', longitude.toString());
-        localStorage.setItem('city', city.toString());
+        if (config.enableSavingLastCity) {
+            localStorage.setItem('latitude', latitude.toString());
+            localStorage.setItem('longitude', longitude.toString());
+            localStorage.setItem('city', city.toString());
+        }
 
         const response = await fetch(`${this.apiAdress}/api/weather/current?lat=${latitude}&lon=${longitude}`);
 
