@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className='bg-transparent flex justify-center p-4'>
+        <footer className='bg-transparent flex justify-center p-4 text-xs'>
             <p className='flex items-center gap-'>
                 Weather and geocoding data by:
                 <a
