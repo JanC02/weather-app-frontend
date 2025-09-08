@@ -5,6 +5,7 @@ import { getWeatherDescription } from "../utils/weatherUtils.ts";
 import type { DailyWeatherType, HourlyDataType, WeatherState, DashboardStatus, AutocompleteType } from "../types.ts";
 import { ZodError } from "zod";
 import { dateParser } from "../utils/dateParser.ts";
+import { config } from '../config.ts';
 
 type WeatherContextType = {
     weatherData: WeatherState | null;
@@ -81,10 +82,12 @@ export default function WeatherContextProvider({ children }: { children: ReactNo
     }
 
     useEffect(() => {
-        const service = WeatherService.getInstance();
-        if (service.latitude && service.longitude) {
-            fetchWeather(service.latitude, service.longitude, service.currentCity);
-        }
+        if (config.enableSavingLastCity) {
+            const service = WeatherService.getInstance();
+            if (service.latitude && service.longitude && service.currentCity) {
+                fetchWeather(service.latitude, service.longitude, service.currentCity);
+            }
+        }        
     }, []);
 
     const value = {
