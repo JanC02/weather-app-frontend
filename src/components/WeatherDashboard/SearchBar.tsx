@@ -58,7 +58,7 @@ export default function SearchBar() {
             )}
             {
                 autocompleteSuggestions.length > 0 &&
-                <ul className='absolute top-full mt-2 w-full max-h-150 overflow-y-auto bg-white rounded-md shadow-lg z-10 overflow-hidden ring-1 ring-gray-200'>
+                <ul className='absolute top-full mt-2 w-full max-h-90 md:max-h-150 overflow-y-auto bg-white rounded-md shadow-lg z-10 overflow-hidden ring-1 ring-gray-200'>
                     {
                         autocompleteSuggestions.map(suggestion => {
                             return <SuggestionItem key={suggestion.id} suggestion={suggestion} handleSearch={handleSearch} />;
