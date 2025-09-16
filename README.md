@@ -10,6 +10,7 @@ A frontend for a weather application built with **React** and **TypeScript**. Th
 *   **Vite**
 *   **TypeScript**
 *   **TailwindCSS**
+*   **ApexCharts** & **React-ApexCharts** (for data visualization)
 *   **Zod** (for data validation)
 
 ***
