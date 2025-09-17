@@ -1,3 +1,4 @@
 export const config = {
-    enableSavingLastCity: false
+    enableSavingLastCity: false,
+    defaultTheme: 'system'
 } as const;
