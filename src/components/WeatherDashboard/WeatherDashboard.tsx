@@ -25,13 +25,13 @@ const renderContent = (
             </div>
 
             { status === 'LOADING' && (
-                <div className='lg:col-span-2 h-full bg-white rounded-lg shadow-sm flex items-center justify-center'>
+                <div className='lg:col-span-2 h-full bg-white dark:bg-slate-800/50 rounded-lg shadow-sm flex items-center justify-center'>
                     <Spinner />
                 </div> 
             )}
 
             { (!weatherData && status === 'OK') && (
-                <div className="h-20 flex items-center justify-center lg:col-span-2 bg-white p-6 rounded-lg shadow-sm text-center">
+                <div className="h-20 flex items-center justify-center lg:col-span-2 bg-white dark:bg-slate-800/50 p-6 rounded-lg shadow-sm text-center">
                     <p>Wyszukaj miasto aby zobaczyć pogodę.</p>
                 </div>
             )}

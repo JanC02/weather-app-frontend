@@ -5,9 +5,9 @@ import ThemeProvider from './contexts/ThemeContext.tsx';
 
 function App() {
     return (
-        <div className='flex flex-col min-h-screen font-default'>
+        <div className='flex flex-col min-h-screen font-default relative'>
             <ThemeProvider>
-                <main className='flex-1 flex items-center justify-center p-4'>
+                <main className='flex-1 flex items-center justify-center p-4 pt-8'>
                     <WeatherContextProvider>
                         <WeatherDashboard />
                     </WeatherContextProvider>

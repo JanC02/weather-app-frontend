@@ -35,6 +35,7 @@ export default function SuggestionItem({ suggestion, handleSearch }: SuggestionI
         className={`
             min-h-12 px-4 flex items-center 
             text-md text-gray-700 hover:bg-blue-500 hover:text-white 
+            dark:text-gray-300 dark:hover:bg-sky-600 dark:hover:text-white
             transition-colors duration-150 cursor-pointer
         `}
     >{getSuggestionText(suggestion)}</li>

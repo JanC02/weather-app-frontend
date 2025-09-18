@@ -39,11 +39,11 @@ export default function SearchBar() {
     };
 
     return (
-        <div className='relative w-full bg-white p-4 pl-0 rounded-lg shadow-sm flex items-center'>
+        <div className='relative w-full bg-white dark:bg-slate-800/50 p-4 pl-0 rounded-lg shadow-sm flex items-center'>
             <input
                 id='search-city'
                 type='search'
-                className='h-12 flex-1 px-4 ml-4 text-lg text-gray-800 bg-gray-100 border-2 border-gray-200 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none appearance-none'
+                className='h-12 flex-1 px-4 ml-4 text-lg text-gray-800 bg-gray-100 border-2 border-gray-200 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none appearance-none dark:bg-slate-700 dark:border-slate-600 dark:text-gray-200 dark:focus:ring-sky-500'
                 onInput={handleInput}
                 value={inputText}
                 placeholder='Wyszukaj miasto'
@@ -58,7 +58,7 @@ export default function SearchBar() {
             )}
             {
                 autocompleteSuggestions.length > 0 &&
-                <ul className='absolute top-full mt-2 w-full max-h-90 md:max-h-150 overflow-y-auto bg-white rounded-md shadow-lg z-10 overflow-hidden ring-1 ring-gray-200'>
+                <ul className='absolute top-full mt-2 w-full max-h-90 md:max-h-150 overflow-y-auto bg-white rounded-md shadow-lg z-10 overflow-hidden ring-1 ring-gray-200 dark:bg-slate-700 dark:ring-slate-600'>
                     {
                         autocompleteSuggestions.map(suggestion => {
                             return <SuggestionItem key={suggestion.id} suggestion={suggestion} handleSearch={handleSearch} />;

@@ -18,8 +18,8 @@ export default function CurrentWeather({ temperature, city, description, weather
             <Icon className='w-24 h-24' />
             <div>
                 <p className="text-5xl font-extrabold">{Math.round(temperature)}°C</p>
-                <p className="text-xl font-bold text-gray-700">{city}</p>
-                <p className="text-md text-gray-500 capitalize">{description || 'Opis niedostępny.'}</p>
+                <p className="text-xl font-bold text-gray-700 dark:text-gray-300">{city}</p>
+                <p className="text-md text-gray-500 dark:text-gray-400 capitalize">{description || 'Opis niedostępny.'}</p>
             </div>
         </div>
     </DashboardItem>
