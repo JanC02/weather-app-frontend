@@ -2,12 +2,25 @@ import type { HourlyDataType } from '../../types.ts';
 import ReactApexChart from 'react-apexcharts';
 import { type ApexOptions } from 'apexcharts';
 import MeteorogramWrapper from './MeteorogramWrapper.tsx';
+import { useTheme } from '../../contexts/ThemeContext.tsx';
+import { useEffect, useState } from 'react';
 
 type PrecipitationMeteorogramProps = {
     hourlyWeather: HourlyDataType[];
 };
 
 export default function PrecipitationMeteorogram({ hourlyWeather }: PrecipitationMeteorogramProps) {
+    const { theme } = useTheme();
+    const [isDark, setIsDark] = useState(false);
+
+    useEffect(() => {
+        if (theme === 'system') {
+            setIsDark(window.matchMedia('(prefers-color-scheme: dark)').matches);
+        } else {
+            setIsDark(theme === 'dark');
+        }
+    }, [theme]);
+
     const series = [
         {
             name: 'precipitation',
@@ -41,7 +54,7 @@ export default function PrecipitationMeteorogram({ hourlyWeather }: Precipitatio
             curve: 'smooth',
             width: [0, 3],
         },
-        colors: ['#0000ff','#fc7b03'],
+        colors: ['#3b82f6','#f97316'],
         xaxis: {
             categories: hourlyWeather.map(item => item.label),
             labels: {
@@ -50,6 +63,7 @@ export default function PrecipitationMeteorogram({ hourlyWeather }: Precipitatio
                 hideOverlappingLabels: true,
                 style: {
                     fontSize: '10px',
+                    colors: isDark ? '#9ca3af' : '#6b7280'
                 },
             },
             tickAmount: Math.round(hourlyWeather.length / 4),
@@ -59,10 +73,14 @@ export default function PrecipitationMeteorogram({ hourlyWeather }: Precipitatio
                 seriesName: 'precipitation',
                 title: {
                     text: 'Opady (mm)',
+                    style: {
+                        color: isDark ? '#9ca3af' : '#6b7280'
+                    }
                 },
                 labels: {
                     style: {
                         fontSize: '11px',
+                        colors: isDark ? '#9ca3af' : '#6b7280'
                     }
                 },
                 min: 0,
@@ -84,16 +102,18 @@ export default function PrecipitationMeteorogram({ hourlyWeather }: Precipitatio
             }
         ],
         tooltip: {
+            theme: isDark ? 'dark' : 'light',
             custom: function({ dataPointIndex }) {
                 const precipitation = hourlyWeather[dataPointIndex].precipitation;
                 const humidity = hourlyWeather[dataPointIndex].humidity;
-                return '<div class="bg-gray-50 p-2 rounded-lg text-sm shadow-lg">' +
+                return '<div class="bg-gray-50 dark:bg-slate-700 p-2 rounded-lg text-sm shadow-lg">' +
                     '<p class="label">Opady: ' + precipitation + ' mm</p>' +
                     '<p class="desc">Wilgotność: ' + humidity + ' %</p>' +
                     '</div>';
             }
         },
         grid: {
+            borderColor: isDark ? '#334155' : '#e5e7eb',
             padding: {
                 bottom: 25,
                 left: 25
