@@ -2,7 +2,7 @@ import ThemeToggle from '../ThemeToggle/ThemeToggle.tsx';
 
 export default function Footer() {
     return (
-        <footer className='bg-transparent flex flex-col sm:flex-row items-center justify-center gap-4 p-4 text-xs text-gray-600 dark:text-gray-400'>
+        <footer className='bg-transparent flex flex-col-reverse sm:flex-row items-center justify-center gap-4 p-4 text-xs text-gray-600 dark:text-gray-400'>
             <div className='flex items-center justify-center flex-wrap text-center'>
                 <span>
                     Weather and geocoding data by:
